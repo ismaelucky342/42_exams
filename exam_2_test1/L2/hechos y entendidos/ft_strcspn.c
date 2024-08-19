@@ -11,6 +11,7 @@ The function should be prototyped as follows:
 
 size_t	ft_strcspn(const char *s, const char *reject);
 */
+#include <string.h>
 
 size_t	ft_strcspn(const char *s, const char *reject)
 {
@@ -24,7 +25,7 @@ size_t	ft_strcspn(const char *s, const char *reject)
         {
             if(s[i] == reject[j])
                 return i; 
-            j++
+            j++;
         }
         i++;
     }

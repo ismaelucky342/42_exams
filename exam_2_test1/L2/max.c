@@ -1,33 +1,23 @@
-int max(int *tab, unsigned int len)
-{
-	int result;
-	unsigned int i = 0;
-	
-	if (len == 0)
-		return (0);
-	result = tab[i];
-	while(i < len)
-	{
-		if (result <  tab[i])
-			result = tab[i];
-		i++;
-	}
-	return result;
-}
 /*
 Assignment name  : max
 Expected files   : max.c
 Allowed functions:
 --------------------------------------------------------------------------------
 
-Write the following function:
+Escribe la siguiente función:
 
-int		max(int* tab, unsigned int len);
+int max(int* tab, unsigned int len);
 
-The first parameter is an array of int, the second is the number of elements in
-the array.
+El primer parámetro es una matriz de int, el segundo es el número de elementos en
+la matriz.
 
-The function returns the largest number found in the array.
+La función devuelve el número más grande encontrado en la matriz.
 
-If the array is empty, the function returns 0.
+Si la matriz está vacía, la función devuelve 0.
 */
+#include<stdio.h>
+
+int		max(int* tab, unsigned int len)
+{
+	
+}

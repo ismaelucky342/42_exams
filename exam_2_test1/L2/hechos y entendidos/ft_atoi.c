@@ -13,11 +13,10 @@ Your function must be declared as follows:
 
 int	ft_atoi(const char *str);
 */
-#include <>
 int	ft_atoi(const char *str)
 {
 	int	res = 0;
-	int signo = 1; 
+	int sign = 1; 
 	
 	 while(*str == ' ' || (*str >= 9 && *str <= 13))
 	 	str++; 

@@ -41,7 +41,7 @@ char		**ft_split(char *str)
         while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
             i++;
 		split[k][j] = '\0';
-		k += 1;
+		k ++;
 	}
 	split[k] = NULL;
 	return (split);

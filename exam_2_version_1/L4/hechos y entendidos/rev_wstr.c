@@ -1,6 +1,4 @@
-## Subject
-
-```
+/*
 Assignment name  : rev_wstr
 Expected files   : rev_wstr.c
 Allowed functions: write, malloc, free
@@ -31,4 +29,41 @@ $> ./rev_wstr | cat -e
 $
 $>
 
-```
+*/
+#include <unistd.h>
+
+int main(int argc, char **argv)
+{
+	int start;
+	int actual_word;
+	int i = 0;
+		
+	if(argc == 2) //example: "Hola   mundo  "
+	{   
+		while(argv[1][i]) //strlen    ******** -> len = 10
+			i++;
+		while(i >= 0) // we start here:  hola mundo  <-
+		{
+			while( argv[1][i] == '\0' || argv[1][i] == ' ' || argv[1][i] == '\t')
+				i--;
+
+			 actual_word = i;  //final of the word  hola mundo<-
+
+			while(argv[1][i] && argv[1][i] != ' ' && argv[1][i] != '\t')
+				i--; //go to word start possition : ->mundo
+			
+			start = i + 1;// the start of the word: m 
+			int  flag = start;// aux
+
+			while(start <= actual_word)
+			{
+				write (1, &argv[1][start],1); // output: "mundo"
+				start++;		
+			}
+
+			if (flag)
+				write(1, " ", 1); // output: "mundo "
+		}
+	}
+	write(1, "\n", 1);
+}

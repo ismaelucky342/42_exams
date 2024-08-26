@@ -1,36 +1,3 @@
-// Define a structure to represent a point with x and y coordinates
-typedef struct	s_point
-{
-	int x;
-	int y;
-} t_point;
-
-// Recursive function to perform flood fill
-void	fill(char **tab, t_point size, t_point cur, char to_fill)
-{
-    // Base cases: Check if the current position is out of bounds
-    // or does not match the target character to replace
-	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x || tab[cur.y][cur.x] != to_fill)
-		return;
-
-    // Replace the character at the current position with 'F'
-	tab[cur.y][cur.x] = 'F';
-
-    // Recursively call fill on the neighboring cells (left, right, up, down)
-	fill(tab, size, (t_point){cur.x - 1, cur.y}, to_fill);
-	fill(tab, size, (t_point){cur.x + 1, cur.y}, to_fill);
-	fill(tab, size, (t_point){cur.x, cur.y - 1}, to_fill);
-	fill(tab, size, (t_point){cur.x, cur.y + 1}, to_fill);
-}
-
-// Wrapper function to start the flood fill process
-void	flood_fill(char **tab, t_point size, t_point begin)
-{
-    // Call the fill function starting from the 'begin' point
-    // Use the character at the start position as the target to replace
-	fill(tab, size, begin, tab[begin.y][begin.x]);
-}
-
 /*
 Assignment name  : flood_fill
 Expected files   : *.c, *.h
@@ -118,3 +85,26 @@ F0FF000F
 FFF0000F
 $>
 */
+typedef struct	s_point
+{
+	int x;
+	int y;
+} t_point;
+
+void	fill(char **tab, t_point size, t_point cur, char to_fill)
+{
+	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x || tab[cur.y][cur.x] != to_fill)
+		return;
+
+	tab[cur.y][cur.x] = 'F';
+
+	fill(tab, size, (t_point){cur.x - 1, cur.y}, to_fill);
+	fill(tab, size, (t_point){cur.x + 1, cur.y}, to_fill);
+	fill(tab, size, (t_point){cur.x, cur.y - 1}, to_fill);
+	fill(tab, size, (t_point){cur.x, cur.y + 1}, to_fill);
+}
+
+void	flood_fill(char **tab, t_point size, t_point begin)
+{
+	fill(tab, size, begin, tab[begin.y][begin.x]);
+}

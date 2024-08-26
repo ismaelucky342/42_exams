@@ -36,7 +36,7 @@ char		**ft_split(char *str)
 			return (NULL);
 
 		while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i])
-			split[k][j++] = str[i++]; //strcpy
+			split[k][j++] = str[i++];
 
         while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
             i++;

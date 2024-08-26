@@ -1,6 +1,4 @@
-## Subject
-
-```
+/*
 Assignment name  : sort_list
 Expected files   : sort_list.c
 Allowed functions:
@@ -31,6 +29,30 @@ in ascending order:
 
 int ascending(int a, int b)
 {
-	return (a <= b);
+    return (a <= b);
 }
-```
+*/
+#include <stdlib.h>
+#include "ft_list.h"
+
+t_list *sort_list(t_list *lst, int (*cmp)(int, int))
+{
+    int swap;
+    t_list *start;
+
+    start = lst;
+
+    while (lst != NULL && lst->next != NULL)
+    {
+        if ((*cmp)(lst->data, lst->next->data) == 0)
+        {
+            swap = lst->data;
+            lst->data = lst->next->data;
+            lst->next->data = swap;
+            lst = start;
+        }
+        else
+            lst = lst->next;
+    }
+    return (start);
+}

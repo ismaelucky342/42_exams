@@ -27,21 +27,21 @@ $>
 
 void	ft_putnbr(int n)
 {
-	char hexadecimals[] = "0123456789";
+	char number[] = "0123456789";
 
 	if(n >= 10)
 		ft_putnbr (n / 10);
-	write(1, &hexadecimals[n % 10], 1); 
+	write(1, &number[n % 10], 1); 
 }
 
 int	main(int argc, char *argv[])
 {
-	int n = atoi(argv[1]);
     int sum = 0;
     
     if(argc == 2)
     {
-         int sum = 0;
+	    int n = atoi(argv[1]);
+        int sum = 0;
 
         for (int i = 2; i <= n; ++i)
         {
@@ -59,6 +59,8 @@ int	main(int argc, char *argv[])
         }
         ft_putnbr(sum);
     }
+    if (argc != 2)
+        putnbr(0); 
     write(1, "\n", 1);
     return 0;
 }

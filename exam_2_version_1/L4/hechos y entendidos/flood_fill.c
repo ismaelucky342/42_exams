@@ -85,26 +85,32 @@ F0FF000F
 FFF0000F
 $>
 */
-typedef struct	s_point
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct s_point
 {
-	int x;
-	int y;
+    int x;
+    int y;
 } t_point;
 
-void	fill(char **tab, t_point size, t_point cur, char to_fill)
+void fill(char **tab, t_point size, t_point matrix, char org, char to_fill)
 {
-	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x || tab[cur.y][cur.x] != to_fill)
-		return;
+    if (matrix.y < 0 || matrix.y >= size.y || matrix.x < 0 || matrix.x >= size.x ||
+        tab[matrix.y][matrix.x] != org || tab[matrix.y][matrix.x] == to_fill)
+        return;
 
-	tab[cur.y][cur.x] = 'F';
+    tab[matrix.y][matrix.x] = to_fill;
 
-	fill(tab, size, (t_point){cur.x - 1, cur.y}, to_fill);
-	fill(tab, size, (t_point){cur.x + 1, cur.y}, to_fill);
-	fill(tab, size, (t_point){cur.x, cur.y - 1}, to_fill);
-	fill(tab, size, (t_point){cur.x, cur.y + 1}, to_fill);
+    fill(tab, size, (t_point){matrix.x - 1, matrix.y}, org, to_fill);
+    fill(tab, size, (t_point){matrix.x + 1, matrix.y}, org, to_fill);
+    fill(tab, size, (t_point){matrix.x, matrix.y - 1}, org, to_fill);
+    fill(tab, size, (t_point){matrix.x, matrix.y + 1}, org, to_fill);
 }
 
-void	flood_fill(char **tab, t_point size, t_point begin)
+void flood_fill(char **tab, t_point size, t_point begin)
 {
-	fill(tab, size, begin, tab[begin.y][begin.x]);
+    fill(tab, size, begin, tab[begin.y][begin.x], 'F');
 }
+

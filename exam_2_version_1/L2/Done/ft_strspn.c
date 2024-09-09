@@ -33,7 +33,7 @@ size_t ft_strspn(const char *s, const char *accept)
 
     return i; 
 }
-
+/*
 
 int main() {
     // Cadena de prueba y conjunto de caracteres
@@ -60,3 +60,4 @@ int main() {
 
     return 0;
 }
+*/

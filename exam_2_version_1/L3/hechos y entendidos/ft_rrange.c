@@ -32,10 +32,10 @@ int     *ft_range(int start, int end)
 	for(i = 0; i < len; i++)
 	{
 		result[i] = start; 
-		if (start > end)
-			start--; 
+		if (end > start)
+			end--; 
 		else
-			start++; 
+			end++; 
 	}
 	return result; 
 }

@@ -38,35 +38,36 @@ $
 
 int main(int argc, char *argv[])
 {
-    int i;
-    int number;
-
     if (argc == 2)
     {
-        i = 1; 
-        number = atoi(argv[1]); 
-
+        int number = atoi(argv[1]);
         if (number == 1)
-            printf("1");
+        {
+            printf("1\n");
+            return 0;
+        }
 
-        while (number >= ++i)
+        int i = 2;
+        int first = 1; // Para controlar si es el primer número (evitar poner '*' al inicio)
+
+        while (i <= number)
         {
             if (number % i == 0)
             {
-                printf("%d", i); 
-                
-                if (number == i)
-                    break;
-
-                printf("*"); 
-
+                if (!first) // No es el primer número, imprime '*'
+                    printf("*");
+                printf("%d", i);
                 number /= i;
-
-                i = 1;
+                first = 0; // A partir de ahora, no es el primer número
             }
+            else
+                i++; // Solo incrementar i si no se pudo dividir
         }
+        printf("\n");
     }
-
-    printf("\n");
-    return (0);
+    else
+    {
+        printf("\n");
+    }
+    return 0;
 }

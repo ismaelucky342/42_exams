@@ -42,7 +42,7 @@ t_list *sort_list(t_list *lst, int (*cmp)(int, int))
 
     start = lst;
 
-    while (lst != NULL && lst->next != NULL)
+    while (lst && lst->next)
     {
         if ((*cmp)(lst->data, lst->next->data) == 0)
         {

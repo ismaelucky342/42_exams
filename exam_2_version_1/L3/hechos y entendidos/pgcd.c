@@ -28,7 +28,7 @@ $> ./pgcd | cat -e
 #include <stdlib.h>
 #include <unistd.h>
 
-int main(int argc, char const *argv[])
+int main(int argc, char const *argv[])//MCD
 {
 	int n1 = atoi(argv[1]); 
 	int n2 = atoi(argv[2]);

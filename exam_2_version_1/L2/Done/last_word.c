@@ -11,12 +11,12 @@ int		main(int argc, char **argv)
 		{
 			if (argv[1][i] == ' ' && argv[1][i + 1] >= 33 && argv[1][i + 1] <= 126)
 				j = i + 1; 
-			i++;
+			i++;  //bucle para encontrar primera posicion last word
 		}
 		while (argv[1][j] >= 33 && argv[1][j] <= 127)
 		{
 			write(1, &argv[1][j], 1);
-			j++; 
+			j++; //imprimirlo
 		}
 	}
 	write(1, "\n", 1);

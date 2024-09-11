@@ -22,7 +22,7 @@ size_t ft_strspn(const char *s, const char *accept)
         size_t j = 0; 
         while (accept[j]) 
         {
-            if (s[i] == accept[j]) 
+            if (s[i] == accept[j]) //numero de coincidencias en j
                 break; 
             j++;
         }

@@ -19,9 +19,9 @@ char    **ft_split(char *str);
 
 char		**ft_split(char *str)
 {
-    int i = 0;
-    int j;
-    int k = 0; 
+    int     i = 0;
+    int     j;
+    int     k = 0; 
 	char	**split;
 
 	if (!(split = (char **)malloc(sizeof(char *) * 256)))

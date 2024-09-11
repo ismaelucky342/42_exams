@@ -32,19 +32,21 @@ Your function must be prototyped as follows:
 unsigned int	lcm(unsigned int a, unsigned int b)
 {
 	if (a == 0 || b == 0)
-		return (0);
+		return 0;
 
 	unsigned int	tempA = a;
 	unsigned int	tempB = b;
-	
+
 	while (tempB)
 	{
 		unsigned int temp = tempB;
-		tempB = tempA % tempB; // 5 MCD
+		tempB = tempA % tempB;
 		tempA = temp;
 	}
-	return ((a * b) / tempA);
+
+	return (a / tempA) * b;
 }
+
 
 /*
 int	main()

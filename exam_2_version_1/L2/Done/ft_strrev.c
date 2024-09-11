@@ -34,7 +34,7 @@ char    *ft_strrev(char *str)
     while (inicio < fin)
     {
         temp = str[inicio];
-        str[inicio] = str[fin];
+        str[inicio] = str[fin]; //swap para cambiar las posiciones inicial y final
         str[fin] = temp;
         inicio++;
         fin--;

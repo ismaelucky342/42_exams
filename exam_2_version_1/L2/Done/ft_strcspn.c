@@ -23,7 +23,7 @@ size_t	ft_strcspn(const char *s, const char *reject)
         j = 0;
         while(reject[j])
         {
-            if(s[i] == reject[j])
+            if(s[i] == reject[j]) //search the first apperance of a char in reject
                 return i; 
             j++;
         }

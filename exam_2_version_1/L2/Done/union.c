@@ -26,32 +26,35 @@ $>./union "rien" | cat -e
 $
 $>
 */
-#include <stdio.h>
+#include <unistd.h>
 
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
-    if(argc == 3)
+    if (ac == 3)
     {
-        int seen[256] = {0}; 
+        unsigned char seen[256] = {0};
+        int i = 0;
+        int j = 0;
 
-        for(int i = 0; argv[1][i]; i++)
+        while (av[1][i])
         {
-            if (!seen[(unsigned char)argv[1][i]]) // Verifica si el carácter aún no se ha mostrado.
+            if (!seen[(unsigned char)av[1][i]])
             {
-                // Recorre la segunda cadena para verificar si el carácter está presente.
-                for (int j = 0; argv[2][j]; j++)
-                {
-                    if (argv[1][i] == argv[2][j])
-                    {
-                        write(1, &argv[1][i], 1); // Muestra el carácter.
-                        seen[(unsigned char)argv[1][i]] = 1; // Marca el carácter como mostrado.
-                        break; // Sale del bucle interno para evitar mostrar el carácter nuevamente.
-                    }
-                }
+                write(1, &av[1][i], 1);
+                seen[(unsigned char)av[1][i]] = 1;
             }
+            i++;
         }
-
-	}
-    write(1, "\n", 1); 
-    return 0; 
+        while (av[2][j])
+        {
+            if (!seen[(unsigned char)av[2][j]])
+            {
+                write(1, &av[2][j], 1);
+                seen[(unsigned char)av[2][j]] = 1;
+            }
+            j++;
+        }
+    }
+    write(1, "\n", 1);
+    return 0;
 }

@@ -24,7 +24,24 @@ $>
 */
 # include <unistd.h>
 # include <stdlib.h>
+#include <unistd.h>
 
+int	ft_atoi(const char *str)
+{
+    int sign = 1; 
+    int result = 0;
+
+    while (*str == ' ' || (*str >= 9 && *str <= 13))
+        	str++;
+	if (*str == '-')
+		sign = -1;
+	if (*str == '-' || *str == '+')
+		str++;
+
+    while(*str >= '0' && *str <= '9')
+        result = result * 10 + *str++ - '0'; 
+    return (result *sign); 
+}
 void	ft_putnbr(int n)
 {
 	char number[] = "0123456789";
@@ -40,7 +57,7 @@ int	main(int argc, char *argv[])
     
     if(argc == 2)
     {
-	    int n = atoi(argv[1]);
+	    int n = ft_atoi(argv[1]);
         int sum = 0;
 
         for (int i = 2; i <= n; ++i)

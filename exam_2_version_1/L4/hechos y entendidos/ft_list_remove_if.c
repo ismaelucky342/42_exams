@@ -31,18 +31,18 @@ void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 	if (begin_list == NULL || *begin_list == NULL) //null check 
 		return;
 
-	t_list *cur = *begin_list; //aux var
+	t_list *aux = *begin_list; //aux var
 
-	if (cmp(cur->data, data_ref) == 0)
+	if (cmp(aux->data, data_ref) == 0) //compara si es igual 
 	{
-		*begin_list = cur->next;
-		free(cur);
-		ft_list_remove_if(begin_list, data_ref, cmp);
+		*begin_list = aux->next;//pasa begin list al siguiente 
+		free(aux);//elimina el actual 
+		ft_list_remove_if(begin_list, data_ref, cmp);//reinicia
 	}
 	else // if there is a no else, you cant pass the Moulinette, tryed 2023.09.08
 	{
-		cur = *begin_list;
-		ft_list_remove_if(&cur->next, data_ref, cmp); //next node
+		//aux = *begin_list; omitible ya que no pierde la referencia
+		ft_list_remove_if(&aux->next, data_ref, cmp); //next node
 	}
 }
 

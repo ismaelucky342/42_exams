@@ -1,5 +1,4 @@
-/*
-Assignment name  : fprime
+/*Assignment name  : fprime
 Expected files   : fprime.c
 Allowed functions: printf, atoi
 --------------------------------------------------------------------------------
@@ -33,41 +32,36 @@ $
 $> ./fprime 42 21 | cat -e
 $
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-    if (argc == 2)
-    {
-        int number = atoi(argv[1]);
-        if (number == 1)
-        {
-            printf("1\n");
-            return 0;
-        }
+	int	i;
+	int	number;
 
-        int i = 2;
-        int first = 1; // Para controlar si es el primer número (evitar poner '*' al inicio)
-
-        while (i <= number)
-        {
-            if (number % i == 0)
-            {
-                if (!first) // No es el primer número, imprime '*'
-                    printf("*");
-                printf("%d", i);
-                number /= i;
-                first = 0; // A partir de ahora, no es el primer número
-            }
-            else
-                i++; // Solo incrementar i si no se pudo dividir
-        }
-        printf("\n");
-    }
-    else
-    {
-        printf("\n");
-    }
-    return 0;
+	if (argc == 2)
+	{
+		i = 1;
+		number = atoi(argv[1]);
+		
+		if (number == 1)
+			printf("1");
+		
+		while (number >= ++i)
+		{
+			if (number % i == 0)
+			{
+				printf("%d", i);
+				if (number == i)
+					break ;
+				printf("*");
+				number /= i;
+				i = 1;
+			}
+		}
+	}
+	printf("\n");
+	return (0);
 }

@@ -14,7 +14,7 @@ int main(int argc, char **argv)
                 {
                     if (argv[1][i] == argv[2][j])
                     {
-                        write(1, &argv[1][i], 1); // Muestra el carácter.
+                        write(1, &argv[1][i++], 1); // Muestra el carácter.
                         seen[(unsigned char)argv[1][i]] = 1; // Marca el carácter como mostrado.
                         break; // Sale del bucle interno para evitar mostrar el carácter nuevamente.
                     }

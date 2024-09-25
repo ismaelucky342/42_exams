@@ -40,10 +40,7 @@ void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 		ft_list_remove_if(begin_list, data_ref, cmp);//reinicia
 	}
 	else // if there is a no else, you cant pass the Moulinette, tryed 2023.09.08
-	{
-		//aux = *begin_list; omitible ya que no pierde la referencia
 		ft_list_remove_if(&aux->next, data_ref, cmp); //next node
-	}
 }
 
 /*

@@ -24,11 +24,12 @@ int     *ft_range(int start, int end)
 {
 	int len = (end - start) + 1; 
 
-	int *result = (int *)malloc(sizeof(int)*len);
-	if(!result)
+	int *result; 
+	int i; 
+
+	if(!(result = (int *)malloc(sizeof(int)*len)))
 		return NULL;
 
-	int i; 
 	for(i = 0; i < len; i++)
 	{
 		result[i] = start; 

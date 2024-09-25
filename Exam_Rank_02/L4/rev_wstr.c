@@ -40,8 +40,9 @@ int main(int argc, char **argv)
 		
 	if(argc == 2) //example: "Hola   mundo  "
 	{   
-		while(argv[1][i]) //strlen    ******** -> len = 10
+		while(argv[1][i])
 			i++;
+
 		while(i >= 0) // we start here:  hola mundo  <-
 		{
 			while( argv[1][i] == '\0' || argv[1][i] == ' ' || argv[1][i] == '\t')

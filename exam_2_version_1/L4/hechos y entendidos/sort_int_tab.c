@@ -15,6 +15,7 @@ Doubles must be preserved.
 
 Input is always coherent.
 */
+
 void	sort_int_tab(int *tab, unsigned int size)
 {
 	unsigned int	i = 0;

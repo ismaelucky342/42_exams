@@ -44,7 +44,6 @@ char *ft_itoa(int nbr)
         len++;
     }
 
-   
     if (!(result = (char *)malloc(sizeof(char) * (len + 1)))) 
         return NULL; 
     

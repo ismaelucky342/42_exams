@@ -42,9 +42,7 @@ int	main(int argc, char **argv)
 				 	argv[1][i] -= 32; 
 			}
 			if ((argv[1][i] >= 'A' && argv[1][i] <= 'Z'))
-			{
 					argv[1][i] += 32;
-			}	
 			
 			write(1, &argv[1][i] , 1); 
 			i++; 

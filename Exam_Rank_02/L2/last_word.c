@@ -4,17 +4,25 @@ int		main(int argc, char **argv)
 {
 	if (argc == 2)
 	{
-		int j = 0;
 		int i = 0;
+		int end = 0; 
+		int start = 0;
 
 		while (argv[1][i])
-		{
-			if (argv[1][i] == ' ' && argv[1][i + 1] >= 33 && argv[1][i + 1] <= 126)
-				j = i + 1; 
-			i++;  //bucle para encontrar primera posicion last word
-		}
-		while (argv[1][j] >= 33 && argv[1][j] <= 127)
-			write(1, &argv[1][j++], 1);
+			i++;
+
+		while( argv[1][i] == '\0' || argv[1][i] == ' ' || argv[1][i] == '\t')
+			i--;
+			 end = i;  //final of the word  hola mundo<-
+
+		while(argv[1][i] && argv[1][i] != ' ' && argv[1][i] != '\t')
+			i--; //go to word start possition : ->mundo
+			
+		start = i + 1;// the start of the word: m 
+
+		// Print the last word
+		while (start <= end)
+			write(1, &argv[1][start++], 1);
 	}
 	write(1, "\n", 1);
 	return (0);

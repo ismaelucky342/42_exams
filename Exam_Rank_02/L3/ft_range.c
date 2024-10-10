@@ -45,3 +45,20 @@ int     *ft_range(int start, int end)
 	}
 	return result; 
 }
+int main(void)
+{
+	int start = -1;
+	int end = 2;
+	int *range = ft_range(start, end);
+	int len = (end - start) + 1;
+	
+	for (int i = 0; i < len; i++)
+	{
+		printf("%d ", range[i]);
+	}
+	printf("\n");
+
+	free(range);
+	return 0;
+}
+

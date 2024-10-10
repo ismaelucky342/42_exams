@@ -34,3 +34,21 @@ void	sort_int_tab(int *tab, unsigned int size)
 			i++;
 	}
 }
+/*
+int main()
+{
+	int tab[] = {5, 2, 9, 1, 5, 6};
+	unsigned int size = sizeof(tab) / sizeof(tab[0]);
+
+	sort_int_tab(tab, size);
+
+	for (unsigned int i = 0; i < size; i++)
+	{
+		printf("%d ", tab[i]);
+	}
+	printf("\n");
+
+	return 0;
+}
+
+*/

@@ -21,21 +21,20 @@ The t_point structure is prototyped like this:
 
   typedef struct  s_point
   {
-    int           x;
-    int           y;
+	int		x;
+	int		y;
   }               t_point;
 
 Example:
 
 $> cat test.c
-#include <stdlib.h>
-#include <stdio.h>
 #include "flood_fill.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 char** make_area(char** zone, t_point size)
 {
 	char** new;
-
 	new = malloc(sizeof(char*) * size.y);
 	for (int i = 0; i < size.y; ++i)
 	{
@@ -44,13 +43,15 @@ char** make_area(char** zone, t_point size)
 			new[i][j] = zone[i][j];
 		new[i][size.x] = '\0';
 	}
-
-	return new;
+	return (new);
 }
 
-int main(void)
+int	main(void)
 {
-	t_point size = {8, 5};
+	t_point	size;
+	t_point	begin;
+
+	size = {8, 5};
 	char *zone[] = {
 		"11111111",
 		"10001001",
@@ -58,13 +59,11 @@ int main(void)
 		"10110001",
 		"11100001",
 	};
-
 	char**  area = make_area(zone, size);
 	for (int i = 0; i < size.y; ++i)
 		printf("%s\n", area[i]);
 	printf("\n");
-
-	t_point begin = {7, 4};
+	begin = {7, 4};
 	flood_fill(area, size, begin);
 	for (int i = 0; i < size.y; ++i)
 		printf("%s\n", area[i]);
@@ -91,26 +90,23 @@ $>
 
 typedef struct s_point
 {
-    int x;
-    int y;
-} t_point;
+	int		x;
+	int		y;
+}			t_point;
 
-void fill(char **tab, t_point size, t_point matrix, char org, char to_fill)
+void	fill(char **tab, t_point size, t_point matrix, char org, char to_fill)
 {
-    if (matrix.y < 0 || matrix.y >= size.y || matrix.x < 0 || matrix.x >= size.x ||
-        tab[matrix.y][matrix.x] != org || tab[matrix.y][matrix.x] == to_fill)
-        return;
-
-    tab[matrix.y][matrix.x] = to_fill;
-
-    fill(tab, size, (t_point){matrix.x - 1, matrix.y}, org, to_fill);
-    fill(tab, size, (t_point){matrix.x + 1, matrix.y}, org, to_fill);
-    fill(tab, size, (t_point){matrix.x, matrix.y - 1}, org, to_fill);
-    fill(tab, size, (t_point){matrix.x, matrix.y + 1}, org, to_fill);
+	if (matrix.y < 0 || matrix.y >= size.y || matrix.x < 0 || matrix.x >= size.x
+		|| tab[matrix.y][matrix.x] != org || tab[matrix.y][matrix.x] == to_fill)
+		return ;
+	tab[matrix.y][matrix.x] = to_fill;
+	fill(tab, size, (t_point){matrix.x - 1, matrix.y}, org, to_fill);
+	fill(tab, size, (t_point){matrix.x + 1, matrix.y}, org, to_fill);
+	fill(tab, size, (t_point){matrix.x, matrix.y - 1}, org, to_fill);
+	fill(tab, size, (t_point){matrix.x, matrix.y + 1}, org, to_fill);
 }
 
-void flood_fill(char **tab, t_point size, t_point begin)
+void	flood_fill(char **tab, t_point size, t_point begin)
 {
-    fill(tab, size, begin, tab[begin.y][begin.x], 'F');
+	fill(tab, size, begin, tab[begin.y][begin.x], 'F');
 }
-

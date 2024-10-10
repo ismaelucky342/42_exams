@@ -36,7 +36,7 @@ int main (int contador, char **cadena)
 	{
 		while (cadena[1][i] == ' ' || cadena[1][i] == '	') //ignores spaces and tabs
 			i++;
-		while ((cadena[1][i] !=  ' ' && cadena[1][i] != '\t') && cadena[1][i]) //write the word and stops in tabs and spaces
+		while (!(cadena[1][i] == ' ' || cadena[1][i] == '	') && cadena[1][i]) //write the word and stops in tabs and spaces
 			write(1, &cadena[1][i++], 1);
 	}
 	write(1, "\n", 1);

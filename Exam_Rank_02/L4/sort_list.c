@@ -33,7 +33,7 @@ int ascending(int a, int b)
 }
 */
 #include <stdlib.h>
-#include "ft_list.h"
+#include "list.h"
 
 t_list *sort_list(t_list *lst, int (*cmp)(int, int))
 {

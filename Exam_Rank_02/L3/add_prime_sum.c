@@ -77,7 +77,7 @@ int	main(int argc, char *argv[])
         ft_putnbr(sum);
     }
     if (argc != 2)
-        putnbr(0); 
+        ft_putnbr(0); 
     write(1, "\n", 1);
     return 0;
 }

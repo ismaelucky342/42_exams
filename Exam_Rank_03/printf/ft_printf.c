@@ -1,26 +1,33 @@
 #include <unistd.h>
 #include <stdarg.h>
 
-int putstr(char *str, int i)
+int putstr(char *s, int count)
 {
-	if (!str)
-		return putstr("(null)", i);
-	if (!str[i])
-		return i;
-	return putstr(str, i + write(1, &str[i], 1));
+	if (!s)
+		s = "(null)";
+	while (*s)
+		count += write(1, s++, 1);
+	return count;
 }
 
 int putnum(long num, int base)
 {
-	char *b = "0123456789abcdef";
-	
+	char *digits = "0123456789abcdef";
+	int count = 0;
+
 	if (num < 0 && base == 10)
-		return write(1, "-", 1) + putnum(num*-1, base);
-	if (num < 0 && base == 16)
-		return putnum((unsigned int)num, base);
-	if (num/base == 0)
-		return write(1, &b[num%base], 1);
-	return putnum(num/base, base) + putnum(num%base, base);
+	{
+		count += write(1, "-", 1);
+		num = -num;
+	}
+	else if (num < 0 && base == 16)
+		num = (unsigned int)num;
+	
+    if (num >= base)
+		count += putnum(num / base, base);
+	count += write(1, &digits[num % base], 1);
+
+	return count;
 }
 
 int ptf(char *s, va_list args, int i, int n)

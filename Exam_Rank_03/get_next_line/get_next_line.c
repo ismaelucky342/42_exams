@@ -1,17 +1,35 @@
-#include "get_next_line.h"
+# include <unistd.h>
+# include <stdlib.h>	
+# include <stdio.h>
+# include <fcntl.h>
 
-char	*ft_strdup(char *src)
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+int ft_strlen(char *str)
 {
-	char	*dest;
-	int		i;
+	int i = 0;
 
-	i = 0;
-	while (src[i])
+	while (str[i])
 		i++;
-	dest = (char *)malloc(sizeof(char) * (i + 1));
-	i = -1;
-	while (src[++i])
-		dest[i] = src[i];
+	return (i);
+}
+
+char *ft_strdup(char *str)
+{
+	int i = 0; 
+	int len = ft_strlen(str);
+	char *dest; 
+
+	if(!(dest = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+
+	while (str[i])
+	{
+		dest[i] = str[i];
+		i++;
+	}
 	dest[i] = '\0';
 	return (dest);
 }

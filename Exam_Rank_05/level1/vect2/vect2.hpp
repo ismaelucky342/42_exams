@@ -1,10 +1,7 @@
 #ifndef VECT2_HPP
 # define VECT2_HPP
 
-
 # include <iostream>
-
-
 
 class vect2{
 
@@ -41,6 +38,5 @@ class vect2{
 vect2 operator*(int scalar, const vect2& other);
 
 std::ostream& operator<<(std::ostream& os, const vect2& other);
-
 
 #endif

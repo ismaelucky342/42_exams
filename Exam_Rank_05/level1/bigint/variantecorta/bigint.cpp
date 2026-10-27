@@ -2,6 +2,15 @@
 #include <sstream>
 #include <cstdlib>
 
+static void normalize(std::string &v) {
+    if (v.empty()) {
+        v = "0";
+        return;
+    }
+    while (v.size() > 1 && v[0] == '0')
+        v.erase(v.begin());
+}
+
 bigint::bigint(unsigned long long n) { std::ostringstream o; o << n; s = o.str(); }
 
 bigint bigint::operator+(const bigint &o) const {
@@ -12,18 +21,33 @@ bigint bigint::operator+(const bigint &o) const {
         r.s.insert(r.s.begin(), char(x % 10 + '0'));
         c = x / 10;
     }
+    normalize(r.s);
     return r;
 }
 
-bigint bigint::operator<<(const bigint &o) const {
+bigint bigint::operator<<(int n) const {
     bigint r(*this);
-    if (s != "0") r.s += std::string(atoi(o.s.c_str()), '0');
+
+    while (n-- > 0)
+        r.s += '0';
+    normalize(r.s);
     return r;
+}
+
+bigint bigint::operator>>(int n) const {
+    bigint r(*this);
+
+    while (n-- > 0 && !r.s.empty())
+        r.s.erase(r.s.end() - 1);
+    normalize(r.s);
+    return r;
+}
+
+// sobrecarga para poder hacer x << y cuando y es bigint
+bigint bigint::operator<<(const bigint &o) const {
+    return *this << std::atoi(o.s.c_str());
 }
 
 bigint bigint::operator>>(const bigint &o) const {
-    size_t n = atoi(o.s.c_str());
-    bigint r(*this);
-    r.s = n >= s.size() ? "0" : s.substr(0, s.size() - n);
-    return r;
+    return *this >> std::atoi(o.s.c_str());
 }

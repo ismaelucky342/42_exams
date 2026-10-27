@@ -9,14 +9,17 @@ class bigint {
     public: 
         bigint(unsigned long long n = 0); 
         bigint operator+(const bigint &o) const; 
+        bigint operator<<(int n) const;
+        bigint operator>>(int n) const;
+        bigint operator<<(const bigint &o) const;
+        bigint operator>> (const bigint &o) const;
+        
         bigint operator+=(const bigint &o) { *this = *this + o; return *this; }
         bigint operator++() { *this = *this + 1; return *this;}
         bigint operator++(int) { bigint r(*this); *this = *this + 1; return r;}
         bigint operator<<=(const bigint &o) { *this = *this << o; return *this; }
         bigint operator>>=(const bigint &o) { *this = *this >> o; return *this; }
 
-        bigint operator<<(const bigint &o) const;
-        bigint operator>> (const bigint &o) const;
 
         bool operator<(const bigint &o) const { return s.size() < o.s.size() || (s.size() == o.s.size() && s < o.s); }
         bool operator<=(const bigint &o) const { return s.size() < o.s.size() || (s.size() == o.s.size() && s <= o.s); }

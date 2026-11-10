@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define D(i, j) d[(i) * w + (j)]
+#define D(i, j) d[(i) * (w + 1) + (j)]
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 int h, w;
@@ -13,7 +13,7 @@ int load(FILE *f)
 
     if (!f || fscanf(f, "%d %c %c %c%*c", &h, &e, &o, &x) != 4
         || h < 1 || e == o || e == x || o == x)
-        return -1; // Si no hay archivo, el formato es inválido o los caracteres se repiten, la mapa no es válido.
+        return -1; // Si no hay archivo, el formato es inválido o los caracteres se repiten, el mapa no es válido.
     g = calloc(h, sizeof(char *)); // Reservamos la matriz de filas del mapa.
     for (i = 0; i < h; i++)
     {
@@ -31,29 +31,34 @@ int load(FILE *f)
 
 void run(FILE *f)
 {
-    int i, j, p = 0, *d;
+    int i, j, *d;
+    int size = 0, row = 0, col = 0; // Lado y esquina inferior derecha del mayor cuadrado.
 
     g = 0;
     if (load(f))
         fprintf(stderr, "map error\n"); // Si el mapa no ha cargado bien, avisamos del error.
     else
     {
-        d = calloc(h * w, sizeof(int)); // Reserva la tabla DP para guardar el tamaño del cuadrado más grande que termina en cada celda.
-        for (i = 0; i < h; i++)
-            for (j = 0; j < w; j++)
+        d = calloc((h + 1) * (w + 1), sizeof(int));
+        // Tabla DP con una fila y una columna extra a 0 (calloc): así las celdas del borde
+        // y los obstáculos no necesitan casos especiales. d[i][j] corresponde a g[i - 1][j - 1].
+        for (i = 1; i <= h; i++)
+            for (j = 1; j <= w; j++)
             {
-                D(i, j) = g[i][j] == o ? 0 : (!i || !j) ? 1
-                    : 1 + MIN(MIN(D(i - 1, j), D(i, j - 1)), D(i - 1, j - 1));
-                // Si la celda es un obstáculo, vale 0; si es libre, calcula la longitud máxima del cuadrado que termina aquí.
-                // Se usa la fórmula clásica del algoritmo del cuadrado máximo.
-                if (D(i, j) > d[p])
-                    p = i * w + j; // Guardamos la posición del mayor cuadrado encontrado hasta ahora.
+                if (g[i - 1][j - 1] == e) // Solo las celdas libres suman; los obstáculos se quedan en 0.
+                    D(i, j) = 1 + MIN(MIN(D(i - 1, j), D(i, j - 1)), D(i - 1, j - 1));
+                if (D(i, j) > size) // En empate nos quedamos con el primero (arriba a la izquierda).
+                {
+                    size = D(i, j);
+                    row = i - 1;
+                    col = j - 1;
+                }
             }
-        for (i = 0; i < d[p] * d[p]; i++)
-            g[p / w - i / d[p]][p % w - i % d[p]] = x;
-        // Recorremos todos los puntos del cuadrado más grande y los rellenamos con el carácter de solución.
+        for (i = 0; i < size; i++)
+            for (j = 0; j < size; j++)
+                g[row - i][col - j] = x; // Rellenamos el cuadrado con el carácter de solución.
         for (i = 0; i < h; i++)
-            fprintf(stdout, "%s\n", g[i]); // Imprimimos cada fila del mapa final con la solución marcada.
+            puts(g[i]); // Imprimimos el mapa final (puts añade el salto de línea).
         free(d);
     }
     for (i = 0; g && i < h; i++)
@@ -72,7 +77,7 @@ int main(int ac, char **av)
     for (i = 1; i < ac; i++)
     {
         if (i > 1)
-            fputs("\n", stdout); // Dejamos una línea en blanco entre varios mapas procesados.
+            puts(""); // Dejamos una línea en blanco entre varios mapas procesados.
         run(fopen(av[i], "r")); // Abrimos y procesamos cada archivo pasado como argumento.
     }
     return 0;
